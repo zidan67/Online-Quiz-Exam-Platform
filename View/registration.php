@@ -1,16 +1,22 @@
+
 <?php
 session_start();
 
 $emailError = $_SESSION["emailError"] ?? "";
 $passwordError = $_SESSION["passwordError"] ?? "";
 $nameError = $_SESSION["nameError"] ?? "";
+$roleError = $_SESSION["roleError"] ?? "";
 
+$role = $_SESSION["role"] ?? "";
 $email = $_SESSION["email"] ?? "";
 $name = $_SESSION["name"] ?? "";
 
+unset($_SESSION["roleError"]);
 unset($_SESSION["nameError"]);
 unset($_SESSION["emailError"]);
 unset($_SESSION["passwordError"]);
+
+unset($_SESSION["role"]);
 unset($_SESSION["name"]);
 unset($_SESSION["email"]);
 ?>
@@ -25,9 +31,9 @@ unset($_SESSION["email"]);
 
         <div class="container">
 
-            <h1>Register</h1>
+            <h1>Registration</h1>
 
-            <form action="../controllers/RegisterController.php" method="POST">
+            <form method="POST" action="../Controller/registerController.php" >
 
                 <div class="reg">
 
@@ -72,20 +78,22 @@ unset($_SESSION["email"]);
                     <div class="roleType">
 
                         <label>
-                            <input type="radio" name="role" value="student" checked> Student
+                            <input type="radio" name="role" value="student" <?php if($role =="student"){echo "checked";} ?>> Student
+                           
                         </label>
 
                         <label>
-                            <input type="radio" name="role" value="instructor"> Instructor
+                            <input type="radio" name="role" value="instructor" <?php if($role =="instructor"){echo "checked";} ?> > Instructor
                         </label>
 
                     </div>
+                        <div class="errorMsg">
+                        <?php echo $roleError; ?>
+                       </div>
 
                 </div>
 
-                <button type="submit">
-                    Register
-                </button>
+                <button type="submit">Register</button>
 
             </form>
 
