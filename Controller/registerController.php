@@ -72,32 +72,12 @@ else {
         exit();
     }
     // PASSWORD HASHING
-
-    $hashedPassword =
-        password_hash(
-            $password,
-            PASSWORD_DEFAULT
-        );
-
-
-
-
+    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
     // INSERT
-    $result =
-        $db->signUp(
-            $connection,
-            "users",
-            $name,
-            $email,
-            $hashedPassword,
-            $role
-        );
-
-
-
+    $result =$db->signUp($connection,"users",$name, $email,$hashedPassword,$role);
 
     if ($result) {
-
+        
         unset($_SESSION["name"]);
         unset($_SESSION["email"]);
         unset($_SESSION["role"]);
