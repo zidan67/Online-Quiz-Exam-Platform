@@ -14,16 +14,22 @@ class DatabaseConnection{
 
     return $connection;
     }
+    //Prevent Sql injection
     function signUp($connection, $tableName,$name, $email, $password, $role){
-    $sql = "INSERT INTO $tableName (name, email, password_hash,role) VALUES('".$name."', '".$email."' , '".$password."', '".$role."')";
-    $result = $connection->query($sql);
-    return $result;
+    $sql = "INSERT INTO $tableName (name, email, password_hash,role) VALUES(?,?,?,?)";
+        $statement = $connection->prepare($sql);
+        $statement->bind_param("ssss", $name ,$email, $password , $role);
+        $result = $statement->execute();
+        return $result;
     }
 
     function checkEmail($connection,$tableName, $email){
-    $sql ="SELECT * FROM $tableName WHERE email = '$email'";
-    $result = $connection->query($sql);
-    return $result;
+    $sql ="SELECT * FROM $tableName WHERE email = ?";
+        $statement = $connection->prepare($sql);
+        $statement->bind_param("s",$email);
+        $statement->execute();
+        $result = $statement->get_result();
+        return $result;
     }
 
 // STUDENT QUIZ COUNT
@@ -58,7 +64,6 @@ function getStudentSummary($connection,$student_id){
 function getInstructorSummary($connection,$instructor_id){
     $sql = "SELECT COUNT(DISTINCT quizzes.id) AS total_quizzes,
             COUNT(attempts.id) AS total_attempts FROM quizzes
-
             LEFT JOIN attempts
             ON quizzes.id = attempts.quiz_id
 
@@ -80,9 +85,12 @@ function getAllUsers($connection){
 
 function toggleUserStatus($connection,$id,$status){
 
-    $sql = "UPDATE users SET is_active='$status' WHERE id='$id'";
-
-    return $connection->query($sql);
+    $sql = "UPDATE users SET is_active=? WHERE id=?";
+        $statement = $connection->prepare($sql);
+        $statement->bind_param("ii",$status,$id);
+        $result =$statement->execute();
+        return $result;
+    return result;
 }
 }
 ?>

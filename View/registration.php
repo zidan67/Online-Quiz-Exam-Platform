@@ -25,6 +25,7 @@ unset($_SESSION["email"]);
 
     <head>
         <title>Registration</title>
+        <script src="../Controller/JSV/register.js"></script>
     </head>
 
     <body>
@@ -33,15 +34,15 @@ unset($_SESSION["email"]);
 
             <h1>Registration</h1>
 
-            <form method="POST" action="../Controller/registerController.php" >
+            <form method="POST" action="../Controller/registerController.php" onsubmit="return validateReg()">
 
                 <div class="reg">
 
                     <label>Name</label>
 
-                    <input type="text" name="name" value="<?php echo $name; ?>">
+                    <input id="name" type="text" name="name" value="<?php echo $name; ?>">
 
-                    <div class="errorMsg">
+                    <div class="errorMsg" id="nameError">
                     <?php echo $nameError; ?>
                     </div>
 
@@ -51,9 +52,9 @@ unset($_SESSION["email"]);
 
                     <label>Email</label>
 
-                    <input type="email" name="email" value="<?php echo $email; ?>">
+                    <input id="email" type="email" name="email" value="<?php echo $email; ?>">
 
-                    <div class="errorMsg">
+                    <div class="errorMsg" id="emailError">
                     <?php echo $emailError; ?>
                     </div>
 
@@ -63,9 +64,9 @@ unset($_SESSION["email"]);
 
                     <label>Password</label>
 
-                    <input type="password" name="password">
+                    <input id="password" type="password" name="password">
 
-                    <div class="errorMsg">
+                    <div class="errorMsg" id="passwordError">
                     <?php echo $passwordError; ?>
                     </div>
 
@@ -78,16 +79,16 @@ unset($_SESSION["email"]);
                     <div class="roleType">
 
                         <label>
-                            <input type="radio" name="role" value="student" <?php if($role =="student"){echo "checked";} ?>> Student
+                            <input id="role" type="radio" name="role" value="student" <?php if($role =="student"){echo "checked";} ?>> Student
                            
                         </label>
 
                         <label>
-                            <input type="radio" name="role" value="instructor" <?php if($role =="instructor"){echo "checked";} ?> > Instructor
+                            <input id="role" type="radio" name="role" value="instructor" <?php if($role =="instructor"){echo "checked";} ?> > Instructor
                         </label>
 
                     </div>
-                        <div class="errorMsg">
+                        <div class="errorMsg" id="roleError">
                         <?php echo $roleError; ?>
                        </div>
 
