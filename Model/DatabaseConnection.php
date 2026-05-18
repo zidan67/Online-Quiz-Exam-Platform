@@ -89,6 +89,78 @@ function toggleUserStatus($connection,$id,$status){
         $statement->bind_param("ii",$status,$id);
         $result =$statement->execute();
         return $result;
+
 }
-}
+    // TOTAL USERS
+
+    function getTotalUsers($connection){
+
+        $sql = "SELECT COUNT(*) AS total FROM users";
+
+        $result = $connection->query($sql);
+
+        return $result;
+    }
+
+
+
+    // ACTIVE USERS
+
+    function getActiveUsers($connection){
+
+        $sql = "SELECT COUNT(*) AS total
+                FROM users
+                WHERE is_active = 1";
+
+        $result = $connection->query($sql);
+
+        return $result;
+    }
+
+
+
+    // TOTAL STUDENTS
+
+    function getTotalStudents($connection){
+
+        $sql = "SELECT COUNT(*) AS total
+                FROM users
+                WHERE role='student'";
+
+        $result = $connection->query($sql);
+
+        return $result;
+    }
+
+
+
+    // TOTAL INSTRUCTORS
+
+    function getTotalInstructors($connection){
+
+        $sql = "SELECT COUNT(*) AS total
+                FROM users
+                WHERE role='instructor'";
+
+        $result = $connection->query($sql);
+
+        return $result;
+    }
+
+
+
+    // RECENT USERS
+
+    function getRecentUsers($connection){
+
+        $sql = "SELECT *
+                FROM users
+                ORDER BY id DESC
+                LIMIT 5";
+
+        $result = $connection->query($sql);
+
+        return $result;
+    }
+    }
 ?>
