@@ -1,8 +1,8 @@
 function validateReg(){
-    let name = document.getElementById("name");
-    let email = document.getElementById("email");
-    let password = document.getElementById("password");
-    let role = document.getElementById("role");
+    let name = document.getElementById("name").value;
+    let email = document.getElementById("email").value;
+    let password = document.getElementById("password").value;
+    let role = document.querySelector('input[name="role"]:checked');
     
     let isValid = true;
     if(name==""){
@@ -33,7 +33,7 @@ function validateReg(){
     isValid = false;
     document.getElementById("passwordError").innerHTML = "Password is required";
     }
-    else if(password.lenngth<8){
+    else if(password.length<8){
     isValid = false;
     document.getElementById("passwordError").innerHTML = "Minimum 8 digits";
     }

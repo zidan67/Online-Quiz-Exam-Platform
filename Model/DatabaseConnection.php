@@ -34,15 +34,12 @@ class DatabaseConnection{
 
 // STUDENT QUIZ COUNT
 
-function getAvailableQuizCount(
-    $connection
-){
+function getAvailableQuizCount($connection){
 
-    $sql = "SELECT COUNT(*) AS total
-            FROM quizzes
+    $sql = "SELECT COUNT(*) AS total FROM quizzes
             WHERE status='Published'";
-
-    return $connection->query($sql);
+    $result = $connection->query($sql);
+    return $result;
 }
 
 
@@ -50,11 +47,12 @@ function getAvailableQuizCount(
 // STUDENT SUMMARY
 
 function getStudentSummary($connection,$student_id){
-    $sql = "SELECT COUNT(*) AS attempts,IFNULL(SUM(score),0) AS total_score FROM attempts
+    $sql = "SELECT COUNT(*) AS attempts,
+            IFNULL(SUM(score),0) AS total_score FROM attempts
             WHERE student_id='$student_id'
             AND completed_at IS NOT NULL";
-
-    return $connection->query($sql);
+    $result = $connection->query($sql);
+    return $result;
 }
 
 
@@ -69,7 +67,8 @@ function getInstructorSummary($connection,$instructor_id){
 
             WHERE quizzes.instructor_id='$instructor_id'";
 
-    return $connection->query($sql);
+    $result = $connection->query($sql);
+    return $result;
 }
 
 // GET USERS
@@ -77,8 +76,8 @@ function getInstructorSummary($connection,$instructor_id){
 function getAllUsers($connection){
 
     $sql = "SELECT * FROM users ORDER BY id DESC";
-
-    return $connection->query($sql);
+    $result = $connection->query($sql);
+    return $result;
 }
 
 // TOGGLE STATUS
@@ -90,7 +89,6 @@ function toggleUserStatus($connection,$id,$status){
         $statement->bind_param("ii",$status,$id);
         $result =$statement->execute();
         return $result;
-    return result;
 }
 }
 ?>
