@@ -26,7 +26,63 @@ class DatabaseConnection{
     return $result;
     }
 
+// STUDENT QUIZ COUNT
 
+function getAvailableQuizCount(
+    $connection
+){
+
+    $sql = "SELECT COUNT(*) AS total
+            FROM quizzes
+            WHERE status='Published'";
+
+    return $connection->query($sql);
 }
 
+
+
+// STUDENT SUMMARY
+
+function getStudentSummary($connection,$student_id){
+    $sql = "SELECT COUNT(*) AS attempts,IFNULL(SUM(score),0) AS total_score FROM attempts
+            WHERE student_id='$student_id'
+            AND completed_at IS NOT NULL";
+
+    return $connection->query($sql);
+}
+
+
+
+// INSTRUCTOR SUMMARY
+
+function getInstructorSummary($connection,$instructor_id){
+    $sql = "SELECT COUNT(DISTINCT quizzes.id) AS total_quizzes,
+            COUNT(attempts.id) AS total_attempts FROM quizzes
+
+            LEFT JOIN attempts
+            ON quizzes.id = attempts.quiz_id
+
+            WHERE quizzes.instructor_id='$instructor_id'";
+
+    return $connection->query($sql);
+}
+
+// GET USERS
+
+function getAllUsers($connection){
+
+    $sql = "SELECT * FROM users ORDER BY id DESC";
+
+    return $connection->query($sql);
+}
+
+// TOGGLE STATUS
+
+function toggleUserStatus($connection,$id,$status){
+
+    $sql = "UPDATE users SET is_active='$status' WHERE id='$id'";
+
+    return $connection->query($sql);
+}
+}
 ?>
