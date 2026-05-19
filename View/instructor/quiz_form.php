@@ -1,7 +1,7 @@
 <?php
 session_start();
-require_once __DIR__ . "/../../controllers/AuthCheck.php";
-require_once __DIR__ . "/../../models/Quiz.php";
+require_once __DIR__ . "/../../Controller/AuthCheck.php";
+require_once __DIR__ . "/../../Model/Quiz.php";
 
 requireInstructor();
 
@@ -31,7 +31,7 @@ unset($_SESSION["errors"]);
             <p class="error"><?php echo htmlspecialchars($error); ?></p>
         <?php endforeach; ?>
 
-        <form action="../../controllers/QuizController.php?action=<?php echo $isEdit ? "update" : "store"; ?>" method="POST" class="form-box">
+        <form action="../../Controller/QuizController.php?action=<?php echo $isEdit ? "update" : "store"; ?>" method="POST" class="form-box">
             <?php if ($isEdit): ?>
                 <input type="hidden" name="quiz_id" value="<?php echo $quiz["id"]; ?>">
             <?php endif; ?>
@@ -59,6 +59,7 @@ unset($_SESSION["errors"]);
 
             <button class="btn" type="submit">Save</button>
             <a class="link" href="quizzes.php">Back</a>
+
         </form>
     </div>
 </body>

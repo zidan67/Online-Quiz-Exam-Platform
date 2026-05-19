@@ -1,8 +1,8 @@
 <?php
 session_start();
 require_once __DIR__ . "/AuthCheck.php";
-require_once __DIR__ . "/../models/Quiz.php";
-require_once __DIR__ . "/../models/Question.php";
+require_once __DIR__ . "/../Model/Quiz.php";
+require_once __DIR__ . "/../Model/Question.php";
 
 requireInstructor();
 
@@ -42,15 +42,15 @@ if ($action === "store" && $_SERVER["REQUEST_METHOD"] === "POST") {
 
     if (!empty($errors)) {
         $_SESSION["errors"] = $errors;
-        header("Location: ../views/instructor/questions.php?quiz_id=" . $quizId);
+        header("Location: ../View/instructor/questions.php?quiz_id=" . $quizId);
         exit;
     }
 
     addQuestion($quizId, $questionText, $marks, array_map("trim", $options), (int) $correctOption);
-    header("Location: ../views/instructor/questions.php?quiz_id=" . $quizId);
+    header("Location: ../View/instructor/questions.php?quiz_id=" . $quizId);
     exit;
 }
 
-header("Location: ../views/instructor/quizzes.php");
+header("Location: ../View/instructor/quizzes.php");
 exit;
 ?>

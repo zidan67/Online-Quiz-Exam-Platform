@@ -1,7 +1,7 @@
 <?php
 session_start();
-require_once __DIR__ . "/../../controllers/AuthCheck.php";
-require_once __DIR__ . "/../../models/Quiz.php";
+require_once __DIR__ . "/../../Controller/AuthCheck.php";
+require_once __DIR__ . "/../../Model/Quiz.php";
 
 requireInstructor();
 $quizzes = getQuizzesByInstructor($_SESSION["user_id"]);
@@ -41,12 +41,12 @@ $quizzes = getQuizzesByInstructor($_SESSION["user_id"]);
                             <span class="badge status-badge"><?php echo htmlspecialchars($quiz["status"]); ?></span>
                         </td>
                         <td class="actions">
-                            <a class="btn small" href="questions.php?quiz_id=<?php echo $quiz["id"]; ?>">Questions</a>
+                            <a class="btn small" href="questions.php?quiz_id=<?php echo $quiz["id"]; ?>">Manage Questions</a>
                             <a class="btn small" href="quiz_form.php?id=<?php echo $quiz["id"]; ?>">Edit</a>
                             <button class="btn small toggle-quiz" data-id="<?php echo $quiz["id"]; ?>">
                                 <?php echo $quiz["status"] === "published" ? "Unpublish" : "Publish"; ?>
                             </button>
-                            <form action="../../controllers/QuizController.php?action=delete" method="POST" class="inline-form">
+                            <form action="../../Controller/QuizController.php?action=delete" method="POST" class="inline-form">
                                 <input type="hidden" name="quiz_id" value="<?php echo $quiz["id"]; ?>">
                                 <button class="btn danger small" type="submit" onclick="return confirm('Delete this quiz?')">Delete</button>
                             </form>

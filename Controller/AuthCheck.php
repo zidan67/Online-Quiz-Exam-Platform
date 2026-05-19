@@ -10,7 +10,7 @@ function requireInstructor()
         $folder = "/Online-Quiz-Exam-Platform";
         $pos = strpos($script, $folder);
         $baseUrl = $pos === false ? "" : substr($script, 0, $pos + strlen($folder));
-        header("Location: " . $baseUrl . "/views/login.php");
+        header("Location: ../../View/login.php");
         exit;
     }
 }

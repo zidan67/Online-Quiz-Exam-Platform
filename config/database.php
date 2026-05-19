@@ -1,6 +1,6 @@
 <?php
 $host = "localhost";
-$dbname = "online_quiz_exam_platform";
+$dbname = "online_quiz_platform";
 $username = "root";
 $password = "";
 
