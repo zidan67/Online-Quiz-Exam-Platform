@@ -1,13 +1,19 @@
 <?php
 session_start();
-require_once __DIR__ . "/../../controllers/AuthCheck.php";
-require_once __DIR__ . "/../../models/Quiz.php";
-require_once __DIR__ . "/../../models/Question.php";
+require_once __DIR__ . "/../../Controller/AuthCheck.php";
+require_once __DIR__ . "/../../Model/Quiz.php";
+require_once __DIR__ . "/../../Model/Question.php";
 
 requireInstructor();
 
 $quizId = (int) ($_GET["quiz_id"] ?? 0);
-$quiz = getQuizById($quizId, $_SESSION["user_id"]);
+
+
+$quiz = getQuizById(
+    $quizId,
+    $_SESSION["user_id"]
+);
+
 if (!$quiz) {
     die("Quiz not found.");
 }
@@ -37,7 +43,7 @@ unset($_SESSION["errors"]);
         <?php endforeach; ?>
 
         <h2>Add Question</h2>
-        <form action="../../controllers/QuestionController.php?action=store" method="POST" class="form-box">
+        <form action="../../Controller/QuestionController.php?action=store" method="POST" class="form-box">
             <input type="hidden" name="quiz_id" value="<?php echo $quizId; ?>">
 
             <label>Question Text</label>
