@@ -1,0 +1,143 @@
+/* TOP */
+
+.topSection{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:25px;
+}
+
+
+
+.topSection input{
+
+    width:300px;
+
+    padding:12px;
+
+    border:1px solid #ddd;
+
+    border-radius:10px;
+}
+
+
+
+/* TABLE */
+
+.tableContainer{
+
+    background:white;
+
+    padding:25px;
+
+    border-radius:15px;
+}
+
+
+
+table{
+
+    width:100%;
+
+    border-collapse:collapse;
+}
+
+
+
+th,
+td{
+
+    padding:18px;
+
+    border-bottom:1px solid #eee;
+
+    text-align:left;
+}
+
+
+
+th{
+
+    background:#f9fafb;
+}
+
+
+
+/* BADGES */
+
+.roleBadge{
+
+    background:#ede9fe;
+
+    color:#7c3aed;
+
+    padding:8px 14px;
+
+    border-radius:20px;
+}
+
+
+
+.activeBadge{
+
+    background:#dcfce7;
+
+    color:green;
+
+    padding:8px 14px;
+
+    border-radius:20px;
+}
+
+
+
+.inactiveBadge{
+
+    background:#fee2e2;
+
+    color:red;
+
+    padding:8px 14px;
+
+    border-radius:20px;
+}
+
+
+
+/* BUTTONS */
+
+.activeBtn{
+
+    background:white;
+
+    border:1px solid red;
+
+    color:red;
+
+    padding:10px 15px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+}
+
+
+
+.inactiveBtn{
+
+    background:white;
+
+    border:1px solid green;
+
+    color:green;
+
+    padding:10px 15px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+}
